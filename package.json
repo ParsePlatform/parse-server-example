@@ -9,26 +9,29 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@types/parse": "^2.18.5",
     "express": "4.17.1",
+    "install": "^0.13.0",
     "kerberos": "1.1.4",
+    "npm": "^7.9.0",
     "parse": "2.19.0",
     "parse-server": "4.5.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "lint": "eslint --cache ./cloud && eslint --cache index.js && eslint --cache ./spec",
-    "lint-fix": "eslint --cache --fix ./cloud && eslint --cache --fix index.js && eslint --cache  --fix./spec",
+    "build": "rimraf ./build && tsc",
+    "start": "npm run build && node build/index.js",
+    "lint": "eslint --cache --ext .ts  ./cloud && eslint --cache index.ts && eslint --cache ./spec",
+    "lint-fix": "eslint --cache --ext .ts --fix ./cloud && eslint --cache --fix index.ts && eslint --cache  --fix ./spec",
     "test": "mongodb-runner start && jasmine",
     "coverage": "nyc jasmine",
-    "prettier": "prettier --write '{cloud,spec}/{**/*,*}.js' 'index.js'",
-    "watch": "babel-watch index.js"
+    "prettier": "prettier --write {cloud,spec}/{**/*,*}.ts index.ts",
+    "watch": "tsc --w"
   },
   "engines": {
     "node": ">=4.3"
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
-    "babel-watch": "7.4.0",
     "eslint": "7.19.0",
     "eslint-config-standard": "16.0.2",
     "eslint-plugin-import": "2.22.1",
@@ -37,6 +40,8 @@
     "jasmine": "3.6.4",
     "mongodb-runner": "4.8.1",
     "nyc": "15.1.0",
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "@types/node": "^12.7.2",
+    "typescript": "^4.0.3"
   }
 }
